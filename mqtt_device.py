@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import json
+import threading
 
 class Topic:
     def __init__(self, topic: str, isCommand: bool):
@@ -35,6 +36,9 @@ class MqttDevice:
         fullTopic = self.__create_full_topic_string(topic)
         print("publishing " + message + " to " + fullTopic)
         self.__client.publish(fullTopic, message)
+
+    def startAsync(self):
+        threading.Thread(target=self.start).start()
 
     def start(self):
         self.__client.loop_forever()
