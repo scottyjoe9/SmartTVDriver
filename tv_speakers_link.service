@@ -1,0 +1,11 @@
+[Unit]
+Description=Linking Speaker ON/OFF State with TV ON/OFF State
+After=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 -u /home/sj/SmartTVDriver/tv_speakers_link.py
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
