@@ -1,4 +1,4 @@
-from serial import Serial
+import serial
 from enum import Enum
 from apscheduler.schedulers.background import BackgroundScheduler
 from threading import Lock
@@ -20,8 +20,8 @@ class LgTvDevice:
 	__lock = Lock()
 
 	def __init__(self, serialName):
-		self.__serial = Serial.Serial(serialName, 9600, 8, Serial.PARITY_NONE,
-                Serial.STOPBITS_ONE, xonxoff=0, rtscts=0, timeout=1)
+		self.__serial = serial.Serial(serialName, 9600, 8, serial.PARITY_NONE,
+                serial.STOPBITS_ONE, xonxoff=0, rtscts=0, timeout=1)
 		job = self.__scheduler.add_job(self.__get_tv_status, 'interval', seconds=2)
 		self.__scheduler.start()
 
